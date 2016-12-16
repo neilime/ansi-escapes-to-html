@@ -1,0 +1,5 @@
+namespace AnsiEscapesToHtml;
+
+class Highlighter {
+
+}
