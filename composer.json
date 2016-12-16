@@ -1,0 +1,19 @@
+{
+    "name": "neilime/ansi-escapes-to-html",
+    "type": "library",
+    "description": "Convert ANSI escapes (terminal formatting/color codes) to HTML",
+    "keywords": ["ANSI", "escapes", "highlight", "html", "convert"],
+    "homepage": "http://neilime.github.io/ansi-escapes-to-html/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Neilime",
+            "homepage": "https://github.com/neilime",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/neilime/ansi-escapes-to-html/issues"
+    },
+    "minimum-stability": "stable"
+}
