@@ -25,5 +25,12 @@
         "psr-4": {
             "TestSuite\\": "tests/TestSuite"
         }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*.*",
+        "satooshi/php-coveralls": "1.*.*"
     }
 }
