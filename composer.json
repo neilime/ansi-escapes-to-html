@@ -15,5 +15,15 @@
     "support": {
         "issues": "https://github.com/neilime/ansi-escapes-to-html/issues"
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "AnsiEscapesToHtml\\": "src/AnsiEscapesToHtml"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TestSuite\\": "tests/TestSuite"
+        }
+    }
 }
