@@ -4,19 +4,14 @@
 [![Latest Stable Version](https://poser.pugx.org/neilime/ansi-escapes-to-html/v/stable.png)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
 [![Total Downloads](https://poser.pugx.org/neilime/ansi-escapes-to-html/downloads.png)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
 
-_ANSI escapes to Html_ is a php script that convert ANSI escapes (terminal formatting/color codes) to HTML markup : 
+_ANSI escapes to Html_ is a php script that convert ANSI escapes (terminal formatting/color codes) to HTML markup :
 ```bash
-ESC[00mESC[01;34mbinESC[00m
-ESC[01;34mcodeESC[00m
-ESC[01;31mdropbox-lnx.x86-0.6.404.tar.gzESC[00m
-ESC[00mfooESC[00m
+\e[40;38;5;82m Hello \e[30;48;5;82m World
 ````
-Became 
+Became
 ```html
-<span style="color:blue">bin</span>
-<span style="color:blue">code</span>
-<span style="color:red">dropbox-lnx.x86-0.6.404.tar.gz</span>
-foo
+<span style="font-weight:normal;text-decoration:none;color:rgb(95,255,0);background-color:Black;"> Hello </span>
+<span style="font-weight:normal;text-decoration:none;color:Black;background-color:rgb(95,255,0);"> World </span>
 ```
 
 # Helping Project
@@ -42,4 +37,3 @@ Name | Version
 2. [Exemple](https://github.com/neilime/ansi-escapes-to-html/wiki/Use-with-Zend-Skeleton-Application)
 7. [PHP Doc](http://neilime.github.io/ansi-escapes-to-html/phpdoc/)
 8. [Code Coverage](http://neilime.github.io/ansi-escapes-to-html/coverage/)
-
