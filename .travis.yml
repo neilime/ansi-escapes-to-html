@@ -4,7 +4,7 @@ sudo: false
 
 env:
   global:
-  - secure: PENfjgcItjkcdkDjZZABlQzrcSDDgtAR5uJ/bTFJ+lryS675X5V/2nzSikxkpx0NvIBvj4N6ooQZDG/WsDNsNL9SYPjeEcmW60ADxs8SBU3+SczBIEIK3IN/5Cdmfrx0HrmuShMe6gkV07ZT1/Jhch1WExapfssZ9eniPqDkECE=
+  - secure: "RwaD70nPZ8rnu91QZTpChmeQt+l/1JYtxwL9DfUu+tefuvBgFT4LSJ7szFnblHjfcW85QBM2PKvhr1aITjfMrzI1gu/IwxxmKij3itk4j+HYmNDwg1TcmJe34vT5zaNylFOH59ad0IhbFvf+kDieO8eDHymKhHd9IUEkDkKX0gwk1Fas1t6fdd6m2HV0UQy5DHrtOsLocOd5WLZw2UWr4SPQ/BB7lJuohde3hRmR0+VPL6EEoqct43BQGdrJI20FWZ6rTfRtT2idZTs+9Ezh9qR06h6K2rQGbNcYHwe8T7J4yWFXWF6edNC7lW8UggGyNqI+WFBvWSyVWunj/w9HoPtdotALtaz4c9SQCCjVPgFr192ntN7dQ+kM58j2AfcRlt5YcpI05DEcMT4boe3ru2kFukElbW6TOw6SqVgOp8Uc1l3FHz+p6DCBqocpgqbPyskBHw5ozX260v0wBHBsWBH89taL2laE8WxfQ3gqGPG2D1byST1JNMNLyk96sTTFpX2W7ndgiatr9LTjIKGmk2iyri5pKh0F22otKUr3Bbv3Zyz2YOYK6xIg7ZXUbU9PAzXNpX+sxNLHPNN8U0y1uMmAa5raW24KgfHHFOeYq9xSuig4BBMmPy4fIbYvmRTvu0pEjv9HHGfR4b1/So+nVhXVsQdTGdcy455ZkWaR0IY="
 
 matrix:
   include:
@@ -12,6 +12,8 @@ matrix:
     - php: '5.4'
     - php: '5.5'
     - php: '5.6'
+    - php: '7.0'
+    - php: '7.1'
       env:
         - EXECUTE_AFTER_SCRIPT=true
 
