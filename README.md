@@ -32,9 +32,57 @@ Name | Version
 -----|--------
 [php](https://secure.php.net/) | >=5.3.3
 
-# Pages
+# Installation
 
-1. [Installation](https://github.com/neilime/ansi-escapes-to-html/wiki/Installation)
-2. [Exemple](https://github.com/neilime/ansi-escapes-to-html/wiki/Use-with-Zend-Skeleton-Application)
-7. [PHP Doc](http://neilime.github.io/ansi-escapes-to-html/phpdoc/)
-8. [Code Coverage](http://neilime.github.io/ansi-escapes-to-html/coverage/)
+## Main Setup
+
+### With composer (the faster way)
+
+1. Add this project in your composer.json:
+
+    ```json
+    "require": {
+        "neilime/ansi-escapes-to-html": "1.*@stable"
+    }
+    ```
+
+2. Now tell composer to download __ANSI escapes to Html__ by running the command:
+
+    ```bash
+    $ php composer.phar update
+    ```
+
+### By cloning project (manual)
+
+1. Clone this project into your `./vendor/` directory.
+
+# Usage
+
+## Composer autoloading
+
+```php
+// Composer autoloading
+if (!file_exists($sComposerAutoloadPath = __DIR__ . '/vendor/autoload.php')) {
+    throw new \RuntimeException('Composer autoload file "' . $sComposerAutoloadPath . '" does not exist');
+}
+if (false === (include $sComposerAutoloadPath)) {
+    throw new \RuntimeException('An error occured while including composer autoload file "' . $sComposerAutoloadPath . '"');
+}
+```
+
+## Initialize Highlighter
+
+```php
+$highlighter = new \AnsiEscapesToHtml\Highlighter();
+```
+
+## Convert ANSI to Html
+
+```php
+$ansiOutput = 'Default \e[34mBlue';
+echo $highlighter->toHtml($ansiOutput);
+```
+Print : 
+```html
+ <span style="font-weight:normal;text-decoration:none;color:White;background-color:Black;">Default </span><span style="font-weight:normal;text-decoration:none;color:Blue;background-color:Black;">Blue</span>
+```
