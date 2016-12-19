@@ -2,8 +2,6 @@
 
 namespace TestSuite;
 
-chdir(dirname(__DIR__));
-
 // Composer autoloading
 if (!file_exists($sComposerAutoloadPath = __DIR__ . '/../vendor/autoload.php')) {
     throw new \RuntimeException('Composer autoload file "' . $sComposerAutoloadPath . '" does not exist');
