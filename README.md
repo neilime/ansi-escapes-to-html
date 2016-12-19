@@ -1,8 +1,8 @@
 # ANSI escapes to Html
 
-[![Build Status](https://travis-ci.org/neilime/ansi-escapes-to-html.png?branch=master)](https://travis-ci.org/neilime/ansi-escapes-to-html)
-[![Latest Stable Version](https://poser.pugx.org/neilime/ansi-escapes-to-html/v/stable.png)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
-[![Total Downloads](https://poser.pugx.org/neilime/ansi-escapes-to-html/downloads.png)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
+[![Build Status](https://travis-ci.org/neilime/ansi-escapes-to-html.svg?branch=master)](https://travis-ci.org/neilime/ansi-escapes-to-html)
+[![Latest Stable Version](https://poser.pugx.org/neilime/ansi-escapes-to-html/v/stable.svg)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
+[![Total Downloads](https://poser.pugx.org/neilime/ansi-escapes-to-html/downloads.svg)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
 [![Coverage Status](https://coveralls.io/repos/github/neilime/ansi-escapes-to-html/badge.svg?branch=master)](https://coveralls.io/github/neilime/ansi-escapes-to-html?branch=master)
 
 _ANSI escapes to Html_ is a php script that convert ANSI escapes (terminal formatting/color codes) to HTML markup :
