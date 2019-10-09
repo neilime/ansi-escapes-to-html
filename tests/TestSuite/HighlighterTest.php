@@ -16,21 +16,17 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
         $this->assertSame('<br/>', $this->highlighter->getConversionTag(\AnsiEscapesToHtml\Highlighter::END_OF_LINE_TAG));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Argument "$sTagName" expects a string, "NULL" given
-     */
     public function testGetConversionTagWithWrongArgument()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument "$sTagName" expects a string, "NULL" given');
         $this->highlighter->getConversionTag(null);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Argument "$sTagName" "wrong" is not an existing tag
-     */
     public function testGetConversionTagUndefined()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument "$sTagName" "wrong" is not an existing tag');
         $this->highlighter->getConversionTag('wrong');
     }
 
@@ -69,12 +65,10 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
         )));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Argument "$sCode" expects a string, "NULL" given
-     */
     public function testGetCssStylesFromCodeWithWrongArgument()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument "$sCode" expects a string, "NULL" given');
         $this->highlighter->getCssStylesFromCode(null, array());
     }
 
@@ -93,12 +87,10 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
         $this->highlighter->getRgbColor(null);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Argument "$sSubject" expects a string, "NULL" given
-     */
     public function testToHtmlWithWrongArgument()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument "$sSubject" expects a string, "NULL" given');
         $this->highlighter->toHtml(null);
     }
 
