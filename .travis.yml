@@ -1,49 +1,26 @@
-language: php
-
-sudo: false
-
 env:
   global:
   - secure: "RwaD70nPZ8rnu91QZTpChmeQt+l/1JYtxwL9DfUu+tefuvBgFT4LSJ7szFnblHjfcW85QBM2PKvhr1aITjfMrzI1gu/IwxxmKij3itk4j+HYmNDwg1TcmJe34vT5zaNylFOH59ad0IhbFvf+kDieO8eDHymKhHd9IUEkDkKX0gwk1Fas1t6fdd6m2HV0UQy5DHrtOsLocOd5WLZw2UWr4SPQ/BB7lJuohde3hRmR0+VPL6EEoqct43BQGdrJI20FWZ6rTfRtT2idZTs+9Ezh9qR06h6K2rQGbNcYHwe8T7J4yWFXWF6edNC7lW8UggGyNqI+WFBvWSyVWunj/w9HoPtdotALtaz4c9SQCCjVPgFr192ntN7dQ+kM58j2AfcRlt5YcpI05DEcMT4boe3ru2kFukElbW6TOw6SqVgOp8Uc1l3FHz+p6DCBqocpgqbPyskBHw5ozX260v0wBHBsWBH89taL2laE8WxfQ3gqGPG2D1byST1JNMNLyk96sTTFpX2W7ndgiatr9LTjIKGmk2iyri5pKh0F22otKUr3Bbv3Zyz2YOYK6xIg7ZXUbU9PAzXNpX+sxNLHPNN8U0y1uMmAa5raW24KgfHHFOeYq9xSuig4BBMmPy4fIbYvmRTvu0pEjv9HHGfR4b1/So+nVhXVsQdTGdcy455ZkWaR0IY="
 
+language: php
+sudo: false
 matrix:
   include:
-    - php: '5.3'
-    - php: '5.4'
-    - php: '5.5'
-    - php: '5.6'
-      env:
-        - EXECUTE_AFTER_SCRIPT=true
-    - php: '7.0'
-    - php: '7.1'
-
-addons:
-  apt:
-    packages:
-    - graphviz
+  - php: '7.2'
+  - php: '7.3'
+    env:
+    - EXECUTE_AFTER_SCRIPT=true
 
 cache:
   directories:
   - "$HOME/.composer/cache"
-
+  
 before_install:
-- mkdir -p ~/.composer
-- cp .travis.composer.json ~/.composer/config.json
-- composer self-update
-- composer install --prefer-dist --dev
-- pear channel-discover pear.phpdoc.org
-- pear install phpdoc/phpDocumentor
-- phpenv rehash
-
-before_script:
-- mkdir -p build/{logs,coverage,phpdoc}
+- travis_retry composer self-update
+- travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest
 
 script:
-- cd tests
-- phpunit -d max_execution_time=0 --coverage-text --coverage-clover ../build/logs/clover.xml --coverage-html ../build/coverage/
-- cd ..
+- composer test:ci
 
 after_script:
-- if [[ $EXECUTE_AFTER_SCRIPT == 'true' ]]; then php vendor/bin/coveralls --verbose --config;fi
-- if [[ $EXECUTE_AFTER_SCRIPT == 'true' ]]; then phpdoc -d "./src" -t "./build/phpdoc" --template="responsive-twig";fi
 - if [[ $EXECUTE_AFTER_SCRIPT == 'true' ]]; then bash <(curl -s https://gist.githubusercontent.com/neilime/769d733c52acdecea8d2548fb3aca3ff/raw/travis_ci_php_publish_build.sh);fi
