@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/neilime/ansi-escapes-to-html/badge.svg?branch=master)](https://coveralls.io/github/neilime/ansi-escapes-to-html?branch=master)
 [![Beerpay](https://beerpay.io/neilime/ansi-escapes-to-html/badge.svg)](https://beerpay.io/neilime/ansi-escapes-to-html)
 
-📢 __ANSI escapes to Html__ is a php script that convert ANSI escapes (terminal formatting/color codes) to HTML markup :
+📢 __ANSI escapes to Html__ is a php script that convert ANSI escapes (terminal formatting/color codes) to HTML markup:
 ```bash
 \e[40;38;5;82m Hello \e[30;48;5;82m World
 ````
@@ -22,12 +22,11 @@ Became
 
 # Contributing
 
-👍 If you wish to contribute to this project, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
-NOTE : If you want to contribute don't hesitate, I'll review any PR.
+👍 If you wish to contribute to this project, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file. Note: If you want to contribute don't hesitate, I'll review any PR.
 
 # Documentation
 
-1. [Installation](https://github.com/neilime/zf-assets-bundle/wiki/Installation)
+1. [Installation](https://github.com/neilime/ansi-escapes-to-html/wiki/Installation)
 2. [Usage](https://github.com/neilime/ansi-escapes-to-html/wiki/Usage)
 3. [Code Coverage](https://coveralls.io/github/neilime/ansi-escapes-to-html)
 4. [PHP Doc](https://neilime.github.io/ansi-escapes-to-html/phpdoc)
