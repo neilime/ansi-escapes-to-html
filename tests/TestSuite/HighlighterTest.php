@@ -5,7 +5,7 @@ namespace TestSuite;
 class HighlighterTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function setUp()
+    protected function setUp() : void
     {
         $this->highlighter = new \AnsiEscapesToHtml\Highlighter();
     }
