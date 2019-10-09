@@ -1,37 +1,36 @@
-## Welcome to GitHub Pages
+---
+layout: default
+title: Home
+---
+# ANSI escapes to Html
 
-You can use the [editor on GitHub](https://github.com/neilime/ansi-escapes-to-html/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+[![Build Status](https://travis-ci.org/neilime/ansi-escapes-to-html.svg?branch=master)](https://travis-ci.org/neilime/ansi-escapes-to-html)
+[![Latest Stable Version](https://poser.pugx.org/neilime/ansi-escapes-to-html/v/stable.svg)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
+[![Total Downloads](https://poser.pugx.org/neilime/ansi-escapes-to-html/downloads.svg)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
+[![Coverage Status](https://coveralls.io/repos/github/neilime/ansi-escapes-to-html/badge.svg?branch=master)](https://coveralls.io/github/neilime/ansi-escapes-to-html?branch=master)
+[![Beerpay](https://beerpay.io/neilime/ansi-escapes-to-html/badge.svg)](https://beerpay.io/neilime/ansi-escapes-to-html)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+📢 __ANSI escapes to Html__ is a php script that convert ANSI escapes (terminal formatting/color codes) to HTML markup:
+```bash
+[40;38;5;82m Hello [30;48;5;82m World
+````
+Became
+```html
+<span style="font-weight:normal;text-decoration:none;color:rgb(95,255,0);background-color:Black;"> Hello </span>
+<span style="font-weight:normal;text-decoration:none;color:Black;background-color:rgb(95,255,0);"> World </span>
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+# Helping Project
 
-### Jekyll Themes
+❤️ If this project helps you reduce time to develop and/or you want to help the maintainer of this project, you can support him on [![Beerpay](https://beerpay.io/neilime/ansi-escapes-to-html/badge.svg)](https://beerpay.io/neilime/ansi-escapes-to-html) Thank you !
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/neilime/ansi-escapes-to-html/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+# Contributing
 
-### Support or Contact
+👍 If you wish to contribute to this project, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file. Note: If you want to contribute don't hesitate, I'll review any PR.
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+# Documentation
+
+1. [Installation](https://github.com/neilime/ansi-escapes-to-html/wiki/Installation)
+2. [Usage](https://github.com/neilime/ansi-escapes-to-html/wiki/Usage)
+3. [Code Coverage](https://coveralls.io/github/neilime/ansi-escapes-to-html)
+4. [PHP Doc](https://neilime.github.io/ansi-escapes-to-html/phpdoc)
