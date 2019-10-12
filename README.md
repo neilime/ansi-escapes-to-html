@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<p align="center">
   <a href="https://neilime.github.io/ansi-escapes-to-html" target="_blank"><img src="https://repository-images.githubusercontent.com/76674702/135ede80-eb7b-11e9-9bf6-36cda923661e" width="400"></a>
 
 # ANSI escapes to Html
@@ -8,7 +8,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/neilime/ansi-escapes-to-html/badge.svg?branch=master)](https://coveralls.io/github/neilime/ansi-escapes-to-html?branch=master)
 [![Beerpay](https://beerpay.io/neilime/ansi-escapes-to-html/badge.svg)](https://beerpay.io/neilime/ansi-escapes-to-html)
 
-</div>
+</p>
 
 
 📢 __ANSI escapes to Html__ is a php script that convert ANSI escapes (terminal formatting/color codes) to HTML markup:
