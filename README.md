@@ -1,7 +1,7 @@
 <p align="center">
-  <a href="https://neilime.github.io/ansi-escapes-to-html" target="_blank"><img src="https://repository-images.githubusercontent.com/76674702/135ede80-eb7b-11e9-9bf6-36cda923661e" width="400"></a>
-
-# ANSI escapes to Html
+  <a href="https://neilime.github.io/ansi-escapes-to-html" target="_blank"><img src="https://repository-images.githubusercontent.com/76674702/0f4fcf80-ece7-11e9-84f1-32287c3d8e95" width="400"></a>
+  <h1 align="center">ANSI escapes to Html</h1>
+  
 [![Build Status](https://travis-ci.org/neilime/ansi-escapes-to-html.svg?branch=master)](https://travis-ci.org/neilime/ansi-escapes-to-html)
 [![Latest Stable Version](https://poser.pugx.org/neilime/ansi-escapes-to-html/v/stable.svg)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
 [![Total Downloads](https://poser.pugx.org/neilime/ansi-escapes-to-html/downloads.svg)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
