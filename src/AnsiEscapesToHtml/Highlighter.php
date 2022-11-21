@@ -4,23 +4,22 @@ namespace AnsiEscapesToHtml;
 
 class Highlighter
 {
-
-    const CONTAINER_TAG = 'CONTAINER_TAG';
-    const END_OF_LINE_TAG = 'END_OF_LINE_TAG';
+    public const CONTAINER_TAG = 'CONTAINER_TAG';
+    public const END_OF_LINE_TAG = 'END_OF_LINE_TAG';
 
     /**
      * Define tag for html conversion
      * @var array
      */
-    protected $conversionTags = array(
+    protected $conversionTags = [
         self::CONTAINER_TAG => 'span',
         self::END_OF_LINE_TAG => '<br/>',
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $definedStyles = array(
+    protected $definedStyles = [
         // Format
         0 => 'font-weight:normal;text-decoration:none;color:White;background-color:Black', // Reset all styles
         1 => 'font-weight:bold', // Bold/bright
@@ -71,79 +70,78 @@ class Highlighter
         105 => 'background-color:#F466CC', // Light magenta
         106 => 'background-color:LightCyan', // Light cyan
         107 => 'background-color:White', // White
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $rgbColors = array();
+    protected $rgbColors = [];
 
     /**
-     * @param string $sSubject
+     * @param string $subject
      * @return string
-     * @throws \InvalidArgumentException
      */
-    public function toHtml($sSubject)
+    public function toHtml(string $subject): string
     {
-        if (!is_string($sSubject)) {
-            throw new \InvalidArgumentException('Argument "$sSubject" expects a string, "' . (is_object($sSubject) ? get_class($sSubject) : gettype($sSubject)) . '" given');
-        }
-
         // Convert ansi escapes
-        $aStyles = $this->getDefaultStyles();
+        $styles = $this->getDefaultStyles();
 
         // Start by a "default styles" container if no styles are expected at the begining
-        if (!preg_match('/^(\e\[([0-9;]+)m)/', $sSubject)) {
-            $sSubject = $this->openContainerWithStyles($aStyles) . $sSubject;
-            $bContainerOpen = true;
+        if (!preg_match('/^(\e\[([0-9;]+)m)/', $subject)) {
+            $subject = $this->openContainerWithStyles($styles) . $subject;
+            $isContainerOpen = true;
         } else {
-            $bContainerOpen = false;
+            $isContainerOpen = false;
         }
 
-        $oSelf = $this;
-        $sSubject = preg_replace_callback('/(\e\[([0-9;]+)m)/', function($aMatches)use($oSelf, &$aStyles, &$bContainerOpen) {
-            $sReturn = '';
-            if ($bContainerOpen) {
-                $sReturn .= $oSelf->closeContainer();
-                $bContainerOpen = false;
-            }
-            $aStyles = $oSelf->getCssStylesFromCode($aMatches[2], $aStyles);
-            $sReturn .= $oSelf->openContainerWithStyles($aStyles);
-            $bContainerOpen = true;
-            return $sReturn;
-        }, $sSubject);
+        $self = $this;
+        $subject = preg_replace_callback(
+            '/(\e\[([0-9;]+)m)/',
+            function ($matches) use ($self, &$styles, &$isContainerOpen) {
+                $return = '';
+                if ($isContainerOpen) {
+                    $return .= $self->closeContainer();
+                    $isContainerOpen = false;
+                }
+                $styles = $self->getCssStylesFromCode($matches[2], $styles);
+                $return .= $self->openContainerWithStyles($styles);
+                $isContainerOpen = true;
+                return $return;
+            },
+            $subject
+        );
 
-        if ($bContainerOpen) {
-            $sSubject .= $this->closeContainer();
-            $bContainerOpen = false;
+        if ($isContainerOpen) {
+            $subject .= $this->closeContainer();
+            $isContainerOpen = false;
         }
 
         // Convert end of lines
-        $sEndOfLineConversion = $this->getConversionTag(self::END_OF_LINE_TAG);
-        if ($sEndOfLineConversion !== PHP_EOL) {
-            $sSubject = str_replace(PHP_EOL, $sEndOfLineConversion, $sSubject);
+        $endOfLineConversion = $this->getConversionTag(self::END_OF_LINE_TAG);
+        if ($endOfLineConversion !== PHP_EOL) {
+            $subject = str_replace(PHP_EOL, $endOfLineConversion, $subject);
         }
 
-        return $sSubject;
+        return $subject;
     }
 
     /**
-     * @param array $aStyles
-     * @return type
+     * @param array $styles
+     * @return string
      */
-    public function openContainerWithStyles(array $aStyles)
+    public function openContainerWithStyles(array $styles): string
     {
-        $sStyles = '';
-        foreach ($aStyles as $sStyle => $sValue) {
-            $sStyles .= $sStyle . ':' . $sValue . ';';
+        $stylesContent = '';
+        foreach ($styles as $style => $value) {
+            $stylesContent .= $style . ':' . $value . ';';
         }
-        return '<' . $this->getConversionTag(self::CONTAINER_TAG) . ' style="' . $sStyles . '">';
+        return '<' . $this->getConversionTag(self::CONTAINER_TAG) . ' style="' . $stylesContent . '">';
     }
 
     /**
      * @return string
      */
-    public function closeContainer()
+    public function closeContainer(): string
     {
         return '</' . $this->getConversionTag(self::CONTAINER_TAG) . '>';
     }
@@ -153,138 +151,132 @@ class Highlighter
      */
     public function getDefaultStyles()
     {
-        $aDefinedStyles = $this->getDefinedStyles();
+        $definedStyles = $this->getDefinedStyles();
 
-        $aDefaultStyles = array();
-        foreach (explode(';', $aDefinedStyles[0]) as $sStyle) {
-            $aStyleParts = explode(':', $sStyle);
-            $aDefaultStyles[$aStyleParts[0]] = $aStyleParts[1];
+        $defaultStyles = [];
+        foreach (explode(';', $definedStyles[0]) as $style) {
+            $styleParts = explode(':', $style);
+            $defaultStyles[$styleParts[0]] = $styleParts[1];
         }
-        return $aDefaultStyles;
+        return $defaultStyles;
     }
 
     /**
      * Define an array of css styles for a given code and default styles
-     * @param string $sCode
-     * @param array $aStyles
+     * @param string $code
+     * @param array $styles
      * @return array
-     * @throws \InvalidArgumentException
      */
-    public function getCssStylesFromCode($sCode, array $aStyles)
+    public function getCssStylesFromCode(string $code, array $styles): array
     {
-        if (!is_string($sCode)) {
-            throw new \InvalidArgumentException('Argument "$sCode" expects a string, "' . (is_object($sCode) ? get_class($sCode) : gettype($sCode)) . '" given');
-        }
-        $sCode = trim($sCode);
+        $code = trim($code);
 
         // 88/256 Colors
-        $aColorsMatches = null;
-        if (preg_match('/(38|48);5;([0-9]+)/', $sCode, $aColorsMatches)) {
-            $iColorNumber = (int) $aColorsMatches[2];
+        $colorsMatches = null;
+        if (preg_match('/(38|48);5;([0-9]+)/', $code, $colorsMatches)) {
+            $colorNumber = (int) $colorsMatches[2];
 
-            // Foreground color
-            if ((int) $aColorsMatches[1] === 38) {
-                $aStyles['color'] = $this->getRgbColor($iColorNumber);
+            $isForegroundColor = (int) $colorsMatches[1] === 38;
+            if ($isForegroundColor) {
+                $styles['color'] = $this->getRgbColor($colorNumber);
+            } else {
+                // Background color
+                $styles['background-color'] = $this->getRgbColor($colorNumber);
             }
-            // Background color
-            else {
-                $aStyles['background-color'] = $this->getRgbColor($iColorNumber);
-            }
-            $sCode = trim(str_replace($aColorsMatches[0], '', $sCode));
+            $code = trim(str_replace($colorsMatches[0], '', $code));
         }
-        if ($sCode !== '') {
+        if ($code !== '') {
             // Defined styles codes
-            $aDefinedStyles = $this->getDefinedStyles();
-            foreach (explode(';', $sCode) as $sCodePart) {
-                $sCodePart = trim($sCodePart);
-                if ($sCodePart === '') {
+            $definedStyles = $this->getDefinedStyles();
+            foreach (explode(';', $code) as $codePart) {
+                $codePart = trim($codePart);
+                if ($codePart === '') {
                     continue;
                 }
-                $iCode = (int) $sCodePart;
-                if (isset($aDefinedStyles[$iCode])) {
-                    if ($aDefinedStyles[$iCode]) {
-                        foreach (explode(';', $aDefinedStyles[$iCode]) as $sStyle) {
-                            $aStylesPart = explode(':', $sStyle);
-                            $aStyles[$aStylesPart[0]] = $aStylesPart[1];
+                $codeNumber = (int) $codePart;
+                if (isset($definedStyles[$codeNumber])) {
+                    if ($definedStyles[$codeNumber]) {
+                        foreach (explode(';', $definedStyles[$codeNumber]) as $style) {
+                            $stylesPart = explode(':', $style);
+                            $styles[$stylesPart[0]] = $stylesPart[1];
                         }
                     }
                 }
             }
         }
-        return $aStyles;
+        return $styles;
     }
 
     /**
-     * @param string $sTagName
+     * @param string $tagName
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getConversionTag($sTagName)
+    public function getConversionTag(string $tagName): string
     {
-        if (!is_string($sTagName)) {
-            throw new \InvalidArgumentException('Argument "$sTagName" expects a string, "' . (is_object($sTagName) ? get_class($sTagName) : gettype($sTagName)) . '" given');
+        if (!isset($this->conversionTags[$tagName])) {
+            throw new \InvalidArgumentException('Argument "$tagName" "' . $tagName . '" is not an existing tag');
         }
-        if (!isset($this->conversionTags[$sTagName])) {
-            throw new \InvalidArgumentException('Argument "$sTagName" "' . $sTagName . '" is not an existing tag');
-        }
-        return $this->conversionTags[$sTagName];
+        return $this->conversionTags[$tagName];
     }
 
     /**
      * @return array
-     * @throws \LogicException
      */
-    public function getDefinedStyles()
+    public function getDefinedStyles(): array
     {
-        if (is_array($this->definedStyles)) {
-            return $this->definedStyles;
-        }
-        throw new \LogicException('Property "definedStyles" expects an array, "' . (is_object($this->definedStyles) ? get_class($this->definedStyles) : gettype($this->definedStyles)) . '" defined');
+        return $this->definedStyles;
     }
 
     /**
-     * @param array $aDefinedStyles
+     * @param array $definedStyles
      * @return \AnsiEscapesToHtml\Highlighter
      */
-    public function setDefinedStyles(array $aDefinedStyles)
+    public function setDefinedStyles(array $definedStyles)
     {
-        $this->definedStyles = $aDefinedStyles;
+        $this->definedStyles = $definedStyles;
         return $this;
     }
 
     /**
-     * @param integer $iColorNumber
+     * @param integer $colorNumber
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getRgbColor($iColorNumber)
+    public function getRgbColor(int $colorNumber): string
     {
-        if (!is_integer($iColorNumber)) {
-            throw new \InvalidArgumentException('Argument "$iColorNumber" expects an integer, "' . (is_object($iColorNumber) ? get_class($iColorNumber) : gettype($iColorNumber)) . '" given');
-        }
 
         // Generate rgb colors array
         if (!$this->rgbColors) {
-            for ($iRedIterator = 0; $iRedIterator < 6; $iRedIterator++) {
-                for ($iGreenIterator = 0; $iGreenIterator < 6; $iGreenIterator++) {
-                    for ($iBlueIterator = 0; $iBlueIterator < 6; $iBlueIterator++) {
-                        $iKeyColorNumer = 16 + ($iRedIterator * 36) + ($iGreenIterator * 6) + $iBlueIterator;
-                        $sRgb = 'rgb(' . ($iRedIterator ? $iRedIterator * 40 + 55 : 0) . ',' . ($iGreenIterator ? $iGreenIterator * 40 + 55 : 0) . ',' . ($iBlueIterator ? $iBlueIterator * 40 + 55 : 0) . ')';
-                        $this->rgbColors[$iKeyColorNumer] = $sRgb;
+            for ($redIterator = 0; $redIterator < 6; $redIterator++) {
+                for ($greenIterator = 0; $greenIterator < 6; $greenIterator++) {
+                    for ($blueIterator = 0; $blueIterator < 6; $blueIterator++) {
+                        $keyColorNumer = 16 + ($redIterator * 36) + ($greenIterator * 6) + $blueIterator;
+                        $rgb = sprintf(
+                            'rgb(%d,%d,%d)',
+                            ($redIterator ? $redIterator * 40 + 55 : 0),
+                            ($greenIterator ? $greenIterator * 40 + 55 : 0),
+                            ($blueIterator ? $blueIterator * 40 + 55 : 0)
+                        );
+                        $this->rgbColors[$keyColorNumer] = $rgb;
                     }
                 }
             }
             // Gray scale
-            for ($iGrayIterator = 0; $iGrayIterator < 24; $iGrayIterator++) {
-                $iKeyColorNumer = $iGrayIterator + 232;
-                $iGray = $iGrayIterator + 10 + 8;
-                $this->rgbColors[$iKeyColorNumer] = 'rgb(' . $iGray . $iGray . $iGray . ')';
+            for ($grayIterator = 0; $grayIterator < 24; $grayIterator++) {
+                $keyColorNumer = $grayIterator + 232;
+                $gray = $grayIterator + 10 + 8;
+                $this->rgbColors[$keyColorNumer] = 'rgb(' . $gray . $gray . $gray . ')';
             }
         }
 
-        if (isset($this->rgbColors[$iColorNumber])) {
-            return $this->rgbColors[$iColorNumber];
+        if (isset($this->rgbColors[$colorNumber])) {
+            return $this->rgbColors[$colorNumber];
         }
-        throw new \InvalidArgumentException('Argument "$iColorNumber" "' . $iColorNumber . '" expects to be in range 16,256');
+
+        throw new \InvalidArgumentException(sprintf(
+            'Argument "$colorNumber" "%d" expects to be in range 16,256',
+            $colorNumber
+        ));
     }
 }
