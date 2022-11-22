@@ -3,11 +3,11 @@
   <h1 align="center">ANSI escapes to Html</h1>
 </p>
 
-[![Continuous integration](https://github.com/ansi-escapes-to-html/workflows/Continuous%20integration/badge.svg)](https://github.com/ansi-escapes-to-html/actions?query=workflow%3A%22Continuous+integration%22)
-[![codecov](https://codecov.io/gh/ansi-escapes-to-html/branch/master/graph/badge.svg?token=eMuwgNub7Z)](https://codecov.io/gh/ansi-escapes-to-html)
-[![Latest Stable Version](https://poser.pugx.org/ansi-escapes-to-html/v/stable)](https://packagist.org/packages/ansi-escapes-to-html)
-[![Total Downloads](https://poser.pugx.org/ansi-escapes-to-html/downloads)](https://packagist.org/packages/ansi-escapes-to-html)
-[![License](https://poser.pugx.org/ansi-escapes-to-html/license)](https://packagist.org/packages/ansi-escapes-to-html)
+[![Continuous integration](https://github.com/neilime/ansi-escapes-to-html/workflows/Continuous%20integration/badge.svg)](https://github.com/neilime/ansi-escapes-to-html/actions?query=workflow%3A%22Continuous+integration%22)
+[![codecov](https://codecov.io/gh/neilime/ansi-escapes-to-html/branch/master/graph/badge.svg?token=eMuwgNub7Z)](https://codecov.io/gh/neilime/ansi-escapes-to-html)
+[![Latest Stable Version](https://poser.pugx.org/neilime/ansi-escapes-to-html/v/stable)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
+[![Total Downloads](https://poser.pugx.org/neilime/ansi-escapes-to-html/downloads)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
+[![License](https://poser.pugx.org/neilime/ansi-escapes-to-html/license)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
 [![Sponsor](https://img.shields.io/badge/%E2%9D%A4-Sponsor-ff69b4)](https://github.com/sponsors/neilime)
 
 📢 **ANSI escapes to Html** is a php script that convert ANSI escapes (terminal formatting/color codes) to HTML markup:
