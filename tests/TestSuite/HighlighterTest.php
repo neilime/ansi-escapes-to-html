@@ -72,6 +72,13 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
         $this->assertSame('rgb(255,0,135)', $this->highlighter->getRgbColor(198));
     }
 
+    public function testGetWrognRgbColorTrowsException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument "$colorNumber" "999" expects to be in range 16,256');
+        $this->highlighter->getRgbColor(999);
+    }
+
     public function testUnderlinedToHtml()
     {
         // echo -e "Normal \e[4mUnderlined \e[24mNormal"

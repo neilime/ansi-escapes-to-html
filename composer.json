@@ -33,7 +33,7 @@
     }
   },
   "require": {
-    "php": "^7.4 || ^8"
+    "php": ">=8.0"
   },
   "require-dev": {
     "pcov/clobber": "^2.0",
