@@ -4,7 +4,7 @@
 </p>
 
 [![Continuous integration](https://github.com/neilime/ansi-escapes-to-html/workflows/Continuous%20integration/badge.svg)](https://github.com/neilime/ansi-escapes-to-html/actions?query=workflow%3A%22Continuous+integration%22)
-[![codecov](https://codecov.io/gh/neilime/ansi-escapes-to-html/branch/master/graph/badge.svg?token=eMuwgNub7Z)](https://codecov.io/gh/neilime/ansi-escapes-to-html)
+[![codecov](https://codecov.io/gh/neilime/ansi-escapes-to-html/branch/main/graph/badge.svg?token=eMuwgNub7Z)](https://codecov.io/gh/neilime/ansi-escapes-to-html)
 [![Latest Stable Version](https://poser.pugx.org/neilime/ansi-escapes-to-html/v/stable)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
 [![Total Downloads](https://poser.pugx.org/neilime/ansi-escapes-to-html/downloads)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
 [![License](https://poser.pugx.org/neilime/ansi-escapes-to-html/license)](https://packagist.org/packages/neilime/ansi-escapes-to-html)
@@ -50,7 +50,7 @@ Became
 
 ## Setup
 
-`PHP_VERSION` is the version of php to use during the development. Example: `8.1`
+`PHP_VERSION` is the version of php to use during the development. Example: `8.2`
 
 ```sh
 make build-php PHP_VERSION
