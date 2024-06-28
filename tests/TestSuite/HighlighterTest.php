@@ -7,6 +7,8 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
     public const SIMPLE_TEXT = 'font-weight:normal;text-decoration:none;';
     public const UNDERLINE_TEXT = 'font-weight:normal;text-decoration:underline;';
 
+    private readonly \AnsiEscapesToHtml\Highlighter $highlighter;
+
     protected function setUp(): void
     {
         $this->highlighter = new \AnsiEscapesToHtml\Highlighter();
