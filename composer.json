@@ -16,6 +16,11 @@
       "name": "Neilime",
       "homepage": "https://github.com/neilime",
       "role": "Developer"
+    },
+    {
+      "name": "ESCEMI",
+      "homepage": "https://github.com/escemi-tech",
+      "role": "Developer"
     }
   ],
   "support": {
@@ -37,20 +42,16 @@
   },
   "require-dev": {
     "pcov/clobber": "^2.0",
-    "phpstan/extension-installer": "^1.4",
-    "phpstan/phpstan": "^1.11",
-    "phpstan/phpstan-phpunit": "^1.4",
-    "phpunit/phpunit": "^9.6.19",
-    "squizlabs/php_codesniffer": "^3.10"
+    "phpunit/phpunit": "^9.6.19"
   },
   "scripts": {
     "test": "phpunit --colors --configuration tests/phpunit.xml",
-    "test:ci": "phpunit --colors --configuration tests/phpunit.xml -d pcov.enabled=1 -d max_execution_time=0 --coverage-text --coverage-clover ./build/logs/clover.xml --coverage-html ./build/coverage/",
-    "cs": "phpcs",
-    "cbf": "phpcbf",
-    "stan": "phpstan analyse --level 5 src",
+    "test:ci": "@test -d pcov.enabled=1 -d max_execution_time=0 --coverage-text --coverage-clover ./build/logs/clover.xml --coverage-html ./build/coverage/",
+    "php-cs-fixer": "@php-cs-fixer:fix --dry-run",
+    "php-cs-fixer:fix": "tools/vendor/bin/php-cs-fixer fix --show-progress=dots --diff --config=.php-cs-fixer.dist.php",
+    "stan": "tools/vendor/bin/phpstan analyse --level 5 src",
     "ci": [
-      "@cs",
+      "@php-cs-fixer",
       "@stan",
       "@test:ci"
     ]

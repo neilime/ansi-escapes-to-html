@@ -31,46 +31,22 @@ Became
 </span>
 ```
 
-# Helping Project
+## Helping Project
 
 ❤️ If this project helps you reduce time to develop and/or you want to help the maintainer of this project. You can [sponsor](https://github.com/sponsors/neilime) him. Thank you !
 
-# Contributing
+## Contributing
 
 👍 If you wish to contribute to this project, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file. Note: If you want to contribute don't hesitate, I'll review any PR.
 
-# Documentation
+## Documentation
 
-1. [Installation](https://neilime.github.io/ansi-escapes-to-html/installation)
-2. [Usage](https://neilime.github.io/ansi-escapes-to-html/usage)
-3. [Code Coverage](https://codecov.io/gh/neilime/ansi-escapes-to-html)
-4. [PHP Doc](https://neilime.github.io/ansi-escapes-to-html/phpdoc)
+### [Installation](https://neilime.github.io/ansi-escapes-to-html/installation)
 
-# Development
+### [Usage](https://neilime.github.io/ansi-escapes-to-html/usage)
 
-## Setup
+### [Code Coverage](https://codecov.io/gh/neilime/ansi-escapes-to-html)
 
-`PHP_VERSION` is the version of php to use during the development. Example: `8.2`
+### [PHP Doc](https://neilime.github.io/ansi-escapes-to-html/phpdoc)
 
-```sh
-make build-php PHP_VERSION
-make install PHP_VERSION
-```
-
-## Running tests
-
-```sh
-make test PHP_VERSION
-```
-
-## Fix code linting
-
-```sh
-make lint-fix PHP_VERSION
-```
-
-## Running CI scripts
-
-```sh
-make ci PHP_VERSION
-```
+### [Development](https://neilime.github.io/ansi-escapes-to-html/development)
