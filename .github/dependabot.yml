@@ -2,14 +2,24 @@ version: 2
 updates:
   - package-ecosystem: composer
     versioning-strategy: increase
-    directory: "/"
+    directories:
+      - "/"
+      - "/tools"
     schedule:
       interval: weekly
       day: friday
       time: "04:00"
+    groups:
+      dev-dependencies:
+        dependency-type: development
+
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
       day: friday
       time: "04:00"
+    groups:
+      github-actions-dependencies:
+        patterns:
+          - "*"
