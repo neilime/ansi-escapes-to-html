@@ -22,7 +22,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: none,iconv,dom,curl,mbstring,tokenizer,xml,xmlwriter,simplexml
+          extensions: none,iconv,dom,curl,mbstring,tokenizer,xml,xmlwriter,simplexml,ctype
           coverage: pcov
   
       - name: ♻️ Get composer cache directory
@@ -62,7 +62,7 @@ jobs:
       - name: ♻️ Tests cache
         uses: actions/cache@v4
         with:
-          path: tests/.phpunit.result.cache
+          path: tests/.phpunit.cache
           key: ${{ runner.os }}-tests-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-tests-
