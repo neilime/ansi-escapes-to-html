@@ -3,5 +3,5 @@
 ## With composer
 
 ```sh
-php composer.phar install ansi-escapes-to-html
+composer require neilime/ansi-escapes-to-html
 ```
