@@ -41,7 +41,7 @@ jobs:
           echo -e "---\nlayout: default\ntitle: Usage\n---\n" > ./_site/usage/index.md
           echo "$(sed -r s"/(\{%[^%]+%\})/{% raw %}\1{% endraw %}/g" ./docs/usage.md)" >> ./_site/usage/index.md
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: docs-site
           path: ./_site
@@ -55,7 +55,7 @@ jobs:
       - name: 📃 Generate PHP documentation
         run: docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 -d ./src -t ./_site/phpdoc
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: docs-phpdoc
           path: ./_site
@@ -72,7 +72,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
 
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           pattern: 'docs-*'
           path: ./
