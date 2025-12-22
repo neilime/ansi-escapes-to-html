@@ -20,7 +20,7 @@ class Highlighter
     ];
 
     /**
-        * @var array<int, string>
+     * @var array<int, string>
      */
     protected $definedStyles = [
         // Format
@@ -76,7 +76,7 @@ class Highlighter
     ];
 
     /**
-        * @var array<int, string>
+     * @var array<int, string>
      */
     protected $rgbColors = [];
 
@@ -173,8 +173,8 @@ class Highlighter
     /**
      * Define an array of css styles for a given code and default styles
      * @param string $code
-        * @param array<string, string> $styles
-        * @return array<string, string>
+     * @param array<string, string> $styles
+     * @return array<string, string>
      */
     public function getCssStylesFromCode(string $code, array $styles): array
     {

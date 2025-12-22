@@ -54,7 +54,7 @@ jobs:
       - name: ♻️ Tests cache
         uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         with:
-          path: tests/.phpunit.result.cache
+          path: tests/.phpunit.cache
           key: ${{ runner.os }}-tests-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-tests-

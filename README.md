@@ -41,12 +41,12 @@ Became
 
 ## Documentation
 
-### [Installation](https://neilime.github.io/ansi-escapes-to-html/installation)
+### [Installation](./docs/installation.md)
 
-### [Usage](https://neilime.github.io/ansi-escapes-to-html/usage)
+### [Usage](./docs/usage.md)
+
+### [Development](./docs/development.md)
 
 ### [Code Coverage](https://codecov.io/gh/neilime/ansi-escapes-to-html)
 
 ### [PHP Doc](https://neilime.github.io/ansi-escapes-to-html/phpdoc)
-
-### [Development](https://neilime.github.io/ansi-escapes-to-html/development)
