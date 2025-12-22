@@ -2,33 +2,37 @@
 
 namespace TestSuite;
 
-class HighlighterTest extends \PHPUnit\Framework\TestCase
+use AnsiEscapesToHtml\Highlighter;
+use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
+
+class HighlighterTest extends TestCase
 {
     public const SIMPLE_TEXT = 'font-weight:normal;text-decoration:none;';
     public const UNDERLINE_TEXT = 'font-weight:normal;text-decoration:underline;';
 
-    private readonly \AnsiEscapesToHtml\Highlighter $highlighter;
+    private readonly Highlighter $highlighter;
 
     protected function setUp(): void
     {
-        $this->highlighter = new \AnsiEscapesToHtml\Highlighter();
+        $this->highlighter = new Highlighter();
     }
 
     public function testGetConversionTag()
     {
         $this->assertSame(
             'span',
-            $this->highlighter->getConversionTag(\AnsiEscapesToHtml\Highlighter::CONTAINER_TAG)
+            $this->highlighter->getConversionTag(Highlighter::CONTAINER_TAG)
         );
         $this->assertSame(
             '<br/>',
-            $this->highlighter->getConversionTag(\AnsiEscapesToHtml\Highlighter::END_OF_LINE_TAG)
+            $this->highlighter->getConversionTag(Highlighter::END_OF_LINE_TAG)
         );
     }
 
     public function testGetConversionTagUndefined()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument "$tagName" "wrong" is not an existing tag');
         $this->highlighter->getConversionTag('wrong');
     }
@@ -76,7 +80,7 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
 
     public function testGetWrognRgbColorTrowsException()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument "$colorNumber" "999" expects to be in range 16,256');
         $this->highlighter->getRgbColor(999);
     }
@@ -84,10 +88,10 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
     public function testUnderlinedToHtml()
     {
         // echo -e "Normal \e[4mUnderlined \e[24mNormal"
-        $expectedContent =
-            '<span style="' . self::SIMPLE_TEXT . 'color:White;background-color:Black;">Normal </span>' .
-            '<span style="' . self::UNDERLINE_TEXT . 'color:White;background-color:Black;">Underlined </span>' .
-            '<span style="' . self::SIMPLE_TEXT . 'color:White;background-color:Black;">Normal</span>';
+        $expectedContent
+            = '<span style="' . self::SIMPLE_TEXT . 'color:White;background-color:Black;">Normal </span>'
+            . '<span style="' . self::UNDERLINE_TEXT . 'color:White;background-color:Black;">Underlined </span>'
+            . '<span style="' . self::SIMPLE_TEXT . 'color:White;background-color:Black;">Normal</span>';
 
         $this->assertSame(
             $expectedContent,
@@ -98,9 +102,9 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
     public function testForegroundBlueToHtml()
     {
         // echo -e "Default \e[34mBlue"
-        $expectedContent =
-            '<span style="' . self::SIMPLE_TEXT . 'color:White;background-color:Black;">Default </span>' .
-            '<span style="' . self::SIMPLE_TEXT . 'color:Blue;background-color:Black;">Blue</span>';
+        $expectedContent
+            = '<span style="' . self::SIMPLE_TEXT . 'color:White;background-color:Black;">Default </span>'
+            . '<span style="' . self::SIMPLE_TEXT . 'color:Blue;background-color:Black;">Blue</span>';
 
         $this->assertSame(
             $expectedContent,
@@ -111,9 +115,9 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
     public function test256ForegroundColorToHtml()
     {
         // echo -e "\e[38;5;82mHello \e[38;5;198mWorld"
-        $expectedContent =
-            '<span style="' . self::SIMPLE_TEXT . 'color:rgb(95,255,0);background-color:Black;">Hello </span>' .
-            '<span style="' . self::SIMPLE_TEXT . 'color:rgb(255,0,135);background-color:Black;">World</span>';
+        $expectedContent
+            = '<span style="' . self::SIMPLE_TEXT . 'color:rgb(95,255,0);background-color:Black;">Hello </span>'
+            . '<span style="' . self::SIMPLE_TEXT . 'color:rgb(255,0,135);background-color:Black;">World</span>';
 
         $this->assertSame(
             $expectedContent,
@@ -124,10 +128,10 @@ class HighlighterTest extends \PHPUnit\Framework\TestCase
     public function test256BackgroundColorToHtml()
     {
         // echo -e "\e[40;38;5;82m Hello \e[30;48;5;82m World \e[0m"
-        $expectedContent =
-            '<span style="' . self::SIMPLE_TEXT . 'color:rgb(95,255,0);background-color:Black;"> Hello </span>' .
-            '<span style="' . self::SIMPLE_TEXT . 'color:Black;background-color:rgb(95,255,0);"> World </span>' .
-            '<span style="' . self::SIMPLE_TEXT . 'color:White;background-color:Black;"></span>';
+        $expectedContent
+            = '<span style="' . self::SIMPLE_TEXT . 'color:rgb(95,255,0);background-color:Black;"> Hello </span>'
+            . '<span style="' . self::SIMPLE_TEXT . 'color:Black;background-color:rgb(95,255,0);"> World </span>'
+            . '<span style="' . self::SIMPLE_TEXT . 'color:White;background-color:Black;"></span>';
 
         $this->assertSame(
             $expectedContent,

@@ -2,6 +2,9 @@
 
 namespace AnsiEscapesToHtml;
 
+use InvalidArgumentException;
+use RuntimeException;
+
 class Highlighter
 {
     public const CONTAINER_TAG = 'CONTAINER_TAG';
@@ -9,7 +12,7 @@ class Highlighter
 
     /**
      * Define tag for html conversion
-     * @var array
+     * @var array<string, string>
      */
     protected $conversionTags = [
         self::CONTAINER_TAG => 'span',
@@ -17,7 +20,7 @@ class Highlighter
     ];
 
     /**
-     * @var array
+        * @var array<int, string>
      */
     protected $definedStyles = [
         // Format
@@ -73,7 +76,7 @@ class Highlighter
     ];
 
     /**
-     * @var array
+        * @var array<int, string>
      */
     protected $rgbColors = [];
 
@@ -111,6 +114,10 @@ class Highlighter
             $subject
         );
 
+        if ($subject === null) {
+            throw new RuntimeException('Failed to convert ANSI escapes (preg_replace_callback returned null).');
+        }
+
         if ($isContainerOpen) {
             $subject .= $this->closeContainer();
             $isContainerOpen = false;
@@ -126,8 +133,7 @@ class Highlighter
     }
 
     /**
-     * @param array $styles
-     * @return string
+     * @param array<string, string> $styles
      */
     public function openContainerWithStyles(array $styles): string
     {
@@ -147,15 +153,18 @@ class Highlighter
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
-    public function getDefaultStyles()
+    public function getDefaultStyles(): array
     {
         $definedStyles = $this->getDefinedStyles();
 
         $defaultStyles = [];
         foreach (explode(';', $definedStyles[0]) as $style) {
-            $styleParts = explode(':', $style);
+            $styleParts = explode(':', $style, 2);
+            if (count($styleParts) !== 2) {
+                continue;
+            }
             $defaultStyles[$styleParts[0]] = $styleParts[1];
         }
         return $defaultStyles;
@@ -164,8 +173,8 @@ class Highlighter
     /**
      * Define an array of css styles for a given code and default styles
      * @param string $code
-     * @param array $styles
-     * @return array
+        * @param array<string, string> $styles
+        * @return array<string, string>
      */
     public function getCssStylesFromCode(string $code, array $styles): array
     {
@@ -195,9 +204,12 @@ class Highlighter
                 }
                 $codeNumber = (int) $codePart;
                 if (isset($definedStyles[$codeNumber])) {
-                    if ($definedStyles[$codeNumber]) {
+                    if ($definedStyles[$codeNumber] !== '') {
                         foreach (explode(';', $definedStyles[$codeNumber]) as $style) {
-                            $stylesPart = explode(':', $style);
+                            $stylesPart = explode(':', $style, 2);
+                            if (count($stylesPart) !== 2) {
+                                continue;
+                            }
                             $styles[$stylesPart[0]] = $stylesPart[1];
                         }
                     }
@@ -210,18 +222,18 @@ class Highlighter
     /**
      * @param string $tagName
      * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getConversionTag(string $tagName): string
     {
         if (!isset($this->conversionTags[$tagName])) {
-            throw new \InvalidArgumentException('Argument "$tagName" "' . $tagName . '" is not an existing tag');
+            throw new InvalidArgumentException('Argument "$tagName" "' . $tagName . '" is not an existing tag');
         }
         return $this->conversionTags[$tagName];
     }
 
     /**
-     * @return array
+     * @return array<int, string>
      */
     public function getDefinedStyles(): array
     {
@@ -229,8 +241,8 @@ class Highlighter
     }
 
     /**
-     * @param array $definedStyles
-     * @return \AnsiEscapesToHtml\Highlighter
+     * @param array<int, string> $definedStyles
+     * @return $this
      */
     public function setDefinedStyles(array $definedStyles)
     {
@@ -241,7 +253,7 @@ class Highlighter
     /**
      * @param integer $colorNumber
      * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getRgbColor(int $colorNumber): string
     {
@@ -274,7 +286,7 @@ class Highlighter
             return $this->rgbColors[$colorNumber];
         }
 
-        throw new \InvalidArgumentException(sprintf(
+        throw new InvalidArgumentException(sprintf(
             'Argument "$colorNumber" "%d" expects to be in range 16,256',
             $colorNumber
         ));
