@@ -1,4 +1,4 @@
-PHP_VERSION=8.4
+PHP_VERSION=8.5
 UID=$(shell id -u)
 GID=$(shell id -g)
 
@@ -28,17 +28,34 @@ test: ## Execute tests for given PHP version
 test-update: ## Execute tests and update snapshots for given PHP version
 	@$(call run-php,composer test:update-snapshot $(filter-out $@,$(MAKECMDGOALS)))
 
+
 lint: ## Execute lint for given PHP version
-	@$(call run-php,composer php-cs-fixer $(filter-out $@,$(MAKECMDGOALS)))
+	$(MAKE) php-cs-fixer $(filter-out $@,$(MAKECMDGOALS))
+	$(MAKE) rector $(filter-out $@,$(MAKECMDGOALS))
+	$(MAKE) phpstan $(filter-out $@,$(MAKECMDGOALS))
 
 lint-fix: ## Execute lint fixing for given PHP version
-	@$(call run-php,composer php-cs-fixer:fix $(filter-out $@,$(MAKECMDGOALS)))
+	$(MAKE) php-cs-fixer-fix $(filter-out $@,$(MAKECMDGOALS))
+	$(MAKE) rector-fix $(filter-out $@,$(MAKECMDGOALS))
 
-stan: ## Execute PHPStan for given PHP version
-	@$(call run-php,composer stan $(filter-out $@,$(MAKECMDGOALS)))
+php-cs-fixer: ## Execute php-cs-fixer for given PHP version
+	@$(call run-php,composer php-cs-fixer -- $(filter-out $@,$(MAKECMDGOALS)))
+
+php-cs-fixer-fix: ## Execute php-cs-fixer fixing for given PHP version
+	@$(call run-php,composer php-cs-fixer:fix -- $(filter-out $@,$(MAKECMDGOALS)))	
+
+rector: ## Execute rector for given PHP version
+	@$(call run-php,composer rector -- $(filter-out $@,$(MAKECMDGOALS)))
+
+rector-fix: ## Execute rector fixing for given PHP version
+	@$(call run-php,composer rector:fix -- $(filter-out $@,$(MAKECMDGOALS)))
+
+phpstan: ## Execute PHPStan for given PHP version
+	@$(call run-php,composer phpstan -- $(filter-out $@,$(MAKECMDGOALS)))
 
 ci: ## Execute CI scripts for given PHP version
-	@$(call run-php,composer ci $(filter-out $@,$(MAKECMDGOALS)))
+	$(MAKE) setup
+	@$(call run-php,composer ci -- $(filter-out $@,$(MAKECMDGOALS)))
 
 ## Run PHP for given version
 define run-php
