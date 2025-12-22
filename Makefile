@@ -28,7 +28,6 @@ test: ## Execute tests for given PHP version
 test-update: ## Execute tests and update snapshots for given PHP version
 	@$(call run-php,composer test:update-snapshot $(filter-out $@,$(MAKECMDGOALS)))
 
-
 lint: ## Execute lint for given PHP version
 	$(MAKE) php-cs-fixer $(filter-out $@,$(MAKECMDGOALS))
 	$(MAKE) rector $(filter-out $@,$(MAKECMDGOALS))
