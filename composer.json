@@ -46,7 +46,6 @@
   },
   "scripts": {
     "test": "phpunit --colors --configuration tests/phpunit.xml",
-    "test:ci": "@test -d pcov.enabled=1 -d max_execution_time=0 --coverage-text --coverage-clover ./build/logs/clover.xml --coverage-html ./build/coverage/",
     "php-cs-fixer": "@php-cs-fixer:fix --dry-run",
     "php-cs-fixer:fix": "tools/vendor/bin/php-cs-fixer fix --show-progress=dots --diff --config=.php-cs-fixer.dist.php",
     "rector": "@rector:fix --dry-run",
@@ -56,8 +55,14 @@
       "@php-cs-fixer",
       "@rector",
       "@phpstan",
-      "@test:ci"
-    ]
+      "@test"
+    ],
+    "lint:ci": [
+      "@php-cs-fixer",
+      "@rector",
+      "@phpstan --error-format=github"
+    ],
+    "test:ci": "@test --log-junit=junit.xml --coverage-clover=clover.xml"
   },
   "config": {
     "optimize-autoloader": true,
