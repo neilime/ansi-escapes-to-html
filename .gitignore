@@ -4,3 +4,5 @@
 composer.lock
 tests/.phpunit.cache
 build/
+/junit.xml
+/clover.xml
