@@ -8,7 +8,7 @@ on:
 permissions: {}
 jobs:
   checks:
-    uses: hoverkraft-tech/ci-github-php/.github/workflows/continuous-integration.yml@6d0964888074223db9c53b756d004846f3a1569e # 2.0.1
+    uses: hoverkraft-tech/ci-github-php/.github/workflows/continuous-integration.yml@63aed766521b3b3bff31c4d36f59b2916e90a361 # 2.0.3
     permissions:
       contents: read
       id-token: write
@@ -20,6 +20,6 @@ jobs:
           "tests": "php <<'PHP'\n<?php\nrequire 'vendor/autoload.php';\n$html = (new AnsiEscapesToHtml\\Highlighter())->toHtml(\"\\033[31mred\\033[0m\");\nif (!str_contains($html, 'red') || !str_contains($html, '<span') || str_contains($html, \"\\033\")) {\n    throw new RuntimeException('The installed highlighter must convert ANSI color codes.');\n}\nPHP"
         }
   documentation:
-    uses: hoverkraft-tech/ci-github-php/.github/workflows/documentation.yml@6d0964888074223db9c53b756d004846f3a1569e # 2.0.1
+    uses: hoverkraft-tech/ci-github-php/.github/workflows/documentation.yml@63aed766521b3b3bff31c4d36f59b2916e90a361 # 2.0.3
     permissions:
       contents: read
